@@ -9,7 +9,7 @@ class NotasApp(QWidget):
         self.setWindowTitle("Cálculo de Notas")
 
         # Definir um ícone para a janela
-        self.setWindowIcon(QIcon('E:\programming\icon.ico'))  # Coloque o caminho correto para seu ícone
+        self.setWindowIcon(QIcon('E:\programming\calcnotaanima\Calcular_nota_anima\icon.ico'))  # Coloque o caminho correto para seu ícone
 
         # Layout da interface
         layout = QVBoxLayout()
@@ -53,7 +53,7 @@ class NotasApp(QWidget):
             media = round(nota1 + nota2 + nota3, 2)
 
             # Verificar se foi aprovado ou reprovado
-            if media < 7:
+            if media < 70:
                 resultado = f"Média: {media} - Reprovado"
             else:
                 resultado = f"Média: {media} - Aprovado"
