@@ -9,6 +9,7 @@ class NotasApp(QWidget):
         super().__init__()
         self.setWindowTitle("Cálculo de Notas")
         
+        # Setting the window icon
         current_dir = os.path.dirname(os.path.abspath(__file__))
         icon_path = os.path.join(current_dir, 'icon.ico')
         
@@ -19,6 +20,7 @@ class NotasApp(QWidget):
 
         layout = QVBoxLayout()
 
+        # Input fields for notes
         self.nota1_input = QLineEdit(self)
         self.nota1_input.setPlaceholderText("Insira a Nota 1")
         self.nota2_input = QLineEdit(self)
@@ -26,9 +28,11 @@ class NotasApp(QWidget):
         self.nota3_input = QLineEdit(self)
         self.nota3_input.setPlaceholderText("Insira a Nota 3")
 
+        # Button to calculate the result
         self.calcular_button = QPushButton("Calcular", self)
         self.calcular_button.clicked.connect(self.calcular_media)
 
+        # Label to display result
         self.result_label = QLabel("Resultado das suas notas.", self)
 
         layout.addWidget(QLabel("Insira suas notas:"))
@@ -39,6 +43,9 @@ class NotasApp(QWidget):
         layout.addWidget(self.result_label)
 
         self.setLayout(layout)
+
+        # Setting minimum window size
+        self.setMinimumSize(300, 200)
 
         self.focusable_widgets = [self.nota1_input, self.nota2_input, self.nota3_input, self.calcular_button]
         for widget in self.focusable_widgets:
@@ -78,7 +85,7 @@ class NotasApp(QWidget):
             nota2 = float(self.nota2_input.text()) * 0.3
             nota3 = float(self.nota3_input.text()) * 0.4
 
-            media = round(nota1 + nota2 + nota3, 2)
+            media = round(nota1 + nota2 + nota3, 0)
 
             if media < 70:
                 resultado = f"Média: {media} - Reprovado"
@@ -88,6 +95,10 @@ class NotasApp(QWidget):
             self.result_label.setText(resultado)
         except ValueError:
             QMessageBox.warning(self, "Erro", "Por favor, insira valores válidos para as notas.")
+            self.nota1_input.clear()
+            self.nota2_input.clear()
+            self.nota3_input.clear()
+            self.nota1_input.setFocus()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
